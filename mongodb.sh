@@ -31,7 +31,7 @@ else
     echo "You are root user"
 fi
 
-sudo set-hostname mongodb
+#sudo set-hostname mongodb
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
