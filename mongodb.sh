@@ -23,7 +23,7 @@ VALIDATE(){
 }
 
 
-if [ $ID -nq 0 ]
+if [ $ID -ne 0 ]
 then 
     echo "ERROR :: become root user to Execute the script"
     exit 1
