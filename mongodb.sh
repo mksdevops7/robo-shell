@@ -25,7 +25,7 @@ VALIDATE(){
 
 if [ $ID -ne 0 ]
 then 
-    echo "$B $R ERROR :: become root user to Execute the script $N"
+    echo "$R "/e[1mERROR :: become root user to Execute the script/e[0m" $N"
     exit 1
 else
     echo "You are root user"
