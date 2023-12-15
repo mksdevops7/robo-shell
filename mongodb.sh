@@ -31,8 +31,8 @@ else
     echo -e "$Y You are root user $N"
 fi
 
-sudo nmcli g hostname manee
-sudo systemctl restart system-hostnamed
+#sudo nmcli g hostname manee
+#sudo systemctl restart system-hostnamed
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
