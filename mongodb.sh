@@ -31,7 +31,7 @@ else
     echo "You are root user"
 fi
 
-sudo hostnamectl set-hostname manee
+hostnamectl set-hostname manee
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
