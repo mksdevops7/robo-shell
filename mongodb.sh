@@ -5,6 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+B="\e[1m"
 
 sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
@@ -25,7 +26,7 @@ VALIDATE(){
 
 if [ $ID -ne 0 ]
 then 
-    echo -e "$R ERROR:: become root user to Execute the script $N"
+    echo -e "$R $B ERROR:: become root user to Execute the script $N $N"
     exit 1
 else
     echo "You are root user"
