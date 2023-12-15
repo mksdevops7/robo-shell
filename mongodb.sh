@@ -31,7 +31,7 @@ else
     echo "You are root user"
 fi
 
-sudo hostname manee
+#sudo hostname manee
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
