@@ -12,14 +12,6 @@ LOGFILE="/tmp/$0-TIMESTAMP.log"
 
 echo "script stareted executing at $TIMESTAMP" &>> $LOGFILE
 
-if [ ID -nq 0 ]
-then 
-    echo "ERROR :: become root user to Execute the script"
-    exit 1
-else
-    echo "You are root user"
-fi
-
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
@@ -30,8 +22,18 @@ VALIDATE(){
     fi
 }
 
-set-hostname mongodb
-timedatectl set-timezone Asia/Kolkata
+
+if [ ID -nq 0 ]
+then 
+    echo "ERROR :: become root user to Execute the script"
+    exit 1
+else
+    echo "You are root user"
+fi
+
+
+sudo set-hostname mongodb
+sudo timedatectl set-timezone Asia/Kolkata
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
