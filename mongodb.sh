@@ -28,7 +28,7 @@ then
     echo -e "$B $R ERROR:: become root user to Execute the script $N $N"
     exit 1
 else
-    echo -e "$Y You are root user $N"
+    echo -e "$B $Y You are a root user $N $N"
 fi
 
 #sudo nmcli g hostname manee
