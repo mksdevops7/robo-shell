@@ -12,7 +12,7 @@ sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-TIMESTAMP.log"
 
-exec &>> $LOGFILE 
+# exec &>> $LOGFILE 
 # executes a Shell command without creating a new process.
 # instead of giving $LOGFILE every where we are giving here to avoid repetition
 
@@ -36,55 +36,55 @@ else
     echo -e "$B $Y You are a root user $N $N"
 fi
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>> $LOGFILE 
 VALIDATE $? "Disabling nodejs"
 
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>> $LOGFILE 
 VALIDATE $? "Enabling nodejs 18"
 
-dnf install nodejs -y
+dnf install nodejs -y &>> $LOGFILE 
 VALIDATE $? "Installing nodejs 18"
 
 id roboshop #if user roboshop doesn't exist,it is failure
 if [ $? -ne 0 ]
 then
-    useradd roboshop
+    useradd roboshop &>> $LOGFILE 
     VALIDATE $? "Adding user roboshop"
 else
     echo -e "user roboshop already exists $Y SKIPPING..$N"
 fi
 
-mkdir -p /app
+mkdir -p /app &>> $LOGFILE 
 
-curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE 
 VALIDATE $? "Downloading user application"
 
-cd /app 
+cd /app &>> $LOGFILE 
 
-unzip /tmp/user.zip
+unzip /tmp/user.zip &>> $LOGFILE 
 VALIDATE $? "Unzipping user"
 
-npm install 
+npm install &>> $LOGFILE 
 VALIDATE $? "Installing Dependencies"
 
-cp /home/centos/robo-shell/user.service /etc/systemd/system/user.service
+cp /home/centos/robo-shell/user.service /etc/systemd/system/user.service &>> $LOGFILE 
 VALIDATE $? "Copying user service file"
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $LOGFILE 
 VALIDATE $? "reloading user daemon"
 
-systemctl enable user 
+systemctl enable user &>> $LOGFILE 
 VALIDATE $? "Enabling user"
 
-systemctl start user
+systemctl start user &>> $LOGFILE 
 VALIDATE $? "Starting user"
 
-cp /home/centos/robo-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/robo-shell/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE 
 VALIDATE $? "copying mongodb repo"
 
-dnf install mongodb-org-shell -y
+dnf install mongodb-org-shell -y &>> $LOGFILE 
 VALIDATE $? "installing mongodb client"
 
-mongo --host $MONGODB_HOST </app/schema/user.js
+mongo --host $MONGODB_HOST </app/schema/user.js &>> $LOGFILE 
 VALIDATE $? "Loading user data into MongoDB"
 

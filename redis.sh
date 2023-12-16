@@ -11,7 +11,7 @@ sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-TIMESTAMP.log"
 
-exec &>> $LOGFILE 
+# exec &>> $LOGFILE 
 # executes a Shell command without creating a new process.
 # instead of giving $LOGFILE every where we are giving here to avoid repetition
 
@@ -35,20 +35,20 @@ else
     echo -e "$B $Y You are a root user $N $N"
 fi
 
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>> $LOGFILE 
 VALIDATE $? "Installing remi-release 8"
 
-dnf module enable redis:remi-6.2 -y
+dnf module enable redis:remi-6.2 -y &>> $LOGFILE 
 VALIDATE $? "enabling Redis remi6.2"
 
-dnf install redis -y
+dnf install redis -y &>> $LOGFILE 
 VALIDATE $? "Installing Redis"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf &>> $LOGFILE 
 VALIDATE $? "Allowing remote connections"
 
-systemctl enable redis
+systemctl enable redis &>> $LOGFILE 
 VALIDATE $? "Enabling redis"
 
-systemctl start redis
+systemctl start redis &>> $LOGFILE 
 VALIDATE $? "Started Redis"
