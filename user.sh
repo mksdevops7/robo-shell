@@ -4,9 +4,9 @@ ID=$(id -u)
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
-N="\e[0m"
+N="\e[0m"0
 B="\e[1m"
-$MONGDB_HOST=mongodb.mksdevops.online
+$MONGODB_HOST=mongodb.mksdevops.online
 
 sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
@@ -85,6 +85,6 @@ VALIDATE $? "copying mongodb repo"
 dnf install mongodb-org-shell -y
 VALIDATE $? "installing mongodb client"
 
-mongo --host $MONGDB_HOST </app/schema/user.js
+mongo --host $MONGODB_HOST </app/schema/user.js
 VALIDATE $? "Loading user data into MongoDB"
 
