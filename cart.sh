@@ -11,7 +11,7 @@ sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-TIMESTAMP.log"
 
-exec &>> $LOGFILE 
+# exec &>> $LOGFILE 
 # executes a Shell command without creating a new process.
 # instead of giving $LOGFILE every where we are giving here to avoid repetition
 
@@ -35,29 +35,29 @@ else
     echo -e "$B $Y You are a root user $N $N"
 fi
 
-mkdir -p /app
+mkdir -p /app &>> $LOGFILE 
 VALIDATE $? "creating app directory"
 
-curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip
+curl -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOGFILE 
 VALIDATE $? "Downloading cart application"
 
-cd /app 
+cd /app &>> $LOGFILE 
 
-unzip -o /tmp/cart.zip  
+unzip -o /tmp/cart.zip  &>> $LOGFILE 
 VALIDATE $? "unzipping cart"
 
-npm install
+npm install &>> $LOGFILE 
 VALIDATE $? "Installing dependencies"
 
 # use absolute, because cart.service exists there
-cp /home/centos/robo-shell/cart.service /etc/systemd/system/cart.service
+cp /home/centos/robo-shell/cart.service /etc/systemd/system/cart.service &>> $LOGFILE 
 VALIDATE $? "Copying cart service file"
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $LOGFILE 
 VALIDATE $? "cart daemon reload"
 
-systemctl enable cart
+systemctl enable cart &>> $LOGFILE 
 VALIDATE $? "Enable cart"
 
-systemctl start cart 
+systemctl start cart &>> $LOGFILE 
 VALIDATE $? "Starting cart"
