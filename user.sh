@@ -6,7 +6,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"0
 B="\e[1m"
-$MONGODB_HOST=mongodb.mksdevops.online
+MONGODB_HOST=mongodb.mksdevops.online
 
 sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
