@@ -46,7 +46,7 @@ cd /app &>> $LOGFILE
 unzip -o /tmp/cart.zip  &>> $LOGFILE 
 VALIDATE $? "unzipping cart"
 
-npm install  &>> $LOGFILE 
+npm install &>> $LOGFILE 
 VALIDATE $? "Installing dependencies"
 
 # use absolute, because cart.service exists there
