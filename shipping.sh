@@ -38,10 +38,10 @@ fi
 
 dnf install maven -y &>> $LOGFILE
 
-id roboshop #if user roboshop doesn't exist,it is failure
+id roboshop &>> $LOGFILE #if user roboshop doesn't exist,it is failure
 if [ $? -ne 0 ]
 then
-    useradd roboshop &>> $LOGFILE
+    useradd roboshop 
     VALIDATE $? "Adding user roboshop"
 else
     echo -e "user roboshop already exists $Y SKIPPING..$N"
