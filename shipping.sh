@@ -6,7 +6,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 B="\e[1m"
-$MONGDB_HOST=mongodb.mksdevops.online
+MONGDB_HOST=mongodb.mksdevops.online
 
 sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
@@ -62,7 +62,7 @@ VALIDATE $? "unzipping shipping"
 mvn clean package &>> $LOGFILE
 VALIDATE $? "Installing dependencies"
 
-mv -f /target/shipping-1.0.jar shipping.jar &>> $LOGFILE
+mv -f /app/target/shipping-1.0.jar /app/target/shipping.jar &>> $LOGFILE
 VALIDATE $? "renaming jar file"
 
 cp /home/centos/robo-shell/shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
