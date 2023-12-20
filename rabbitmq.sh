@@ -9,7 +9,7 @@ B="\e[1m"
 
 sudo timedatectl set-timezone Asia/Kolkata
 TIMESTAMP=$(date +%F-%H-%M-%S)
-LOGFILE="/tmp/$0-TIMESTAMP.log"
+LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
 # exec &>> $LOGFILE 
 # executes a Shell command without creating a new process.
@@ -50,8 +50,16 @@ VALIDATE $? "Enabling rabbitmq server"
 systemctl start rabbitmq-server  &>> $LOGFILE
 VALIDATE $? "Starting rabbitmq server"
 
-rabbitmqctl -f add_user roboshop roboshop123 &>> $LOGFILE
+rabbitmqctl add_user roboshop roboshop123 &>> $LOGFILE
 VALIDATE $? "creating user"
+# id roboshop #if user roboshop doesn't exist,it is failure
+# if [ $? -ne 0 ]
+# then
+#     useradd roboshop &>> $LOGFILE 
+#     VALIDATE $? "Adding user roboshop"
+# else
+#     echo -e "user roboshop already exists $Y SKIPPING..$N"
+# fi
 
 rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>> $LOGFILE
 VALIDATE $? "setting permission"
