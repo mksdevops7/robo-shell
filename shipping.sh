@@ -41,7 +41,7 @@ dnf install maven -y &>> $LOGFILE
 id roboshop #if user roboshop doesn't exist,it is failure
 if [ $? -ne 0 ]
 then
-    useradd roboshop
+    useradd roboshop &>> $LOGFILE
     VALIDATE $? "Adding user roboshop"
 else
     echo -e "user roboshop already exists $Y SKIPPING..$N"
@@ -62,7 +62,7 @@ VALIDATE $? "unzipping shipping"
 mvn clean package &>> $LOGFILE
 VALIDATE $? "Installing dependencies"
 
-mv -f /app/target/shipping-1.0.jar /app/target/shipping.jar &>> $LOGFILE
+mv target/shipping-1.0.jar shipping.jar &>> $LOGFILE
 VALIDATE $? "renaming jar file"
 
 cp /home/centos/robo-shell/shipping.service /etc/systemd/system/shipping.service &>> $LOGFILE
