@@ -6,6 +6,7 @@ INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipp
 ZONE_ID=Z06413213D4SK6YPWDYO4
 DOMAIN_NAME="mksdevops.online"
 
+#This script is for to create Instances and route53 records
 #be aware with the above details while run the script
 
 for i in "${INSTANCES[@]}"
